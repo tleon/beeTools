@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/penix_mobile"
+    android:background="@color/colorPrimary"
     tools:context="ragus.lienty.fromscratch.Settings">
 
     <!-- TODO: Update blank fragment layout -->

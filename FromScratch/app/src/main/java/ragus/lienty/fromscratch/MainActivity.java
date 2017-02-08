@@ -4,15 +4,12 @@ import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-
-import static android.R.attr.fragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -77,13 +74,13 @@ public class MainActivity extends AppCompatActivity {
         Class fragmentClass;
         switch(menuItem.getItemId()) {
             case R.id.nav_first_fragment:
-                fragmentClass = SkillQueue.class;
+                fragmentClass = Account.class;
                 break;
             case R.id.nav_second_fragment:
                 fragmentClass = Settings.class;
                 break;
             case R.id.nav_third_fragment:
-                fragmentClass = Other.class;
+                fragmentClass = Characters.class;
                 break;
             default:
                 fragmentClass = MainActivity.class;
