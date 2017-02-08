@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         setTitle(menuItem.getTitle());
         // Close the navigation drawer
         mDrawer.closeDrawers();
+
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
