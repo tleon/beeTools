@@ -1,0 +1,37 @@
+
+https://api.eveonline.com/account/Characters.xml.aspx?keyID=APIKEYID&vCode=APIVCODE
+
+
+
+<?xml version='1.0' encoding='UTF-8'?>
+<eveapi version="2">
+  <currentTime>2017-02-07 08:19:16</currentTime>
+  <result>
+    <rowset name="characters" key="characterID" columns="name,characterID,corporationName,corporationID,allianceID,allianceName,factionID,factionName">
+      <row name="Taneo" characterID="97069019" corporationName="Deep Core Mining Inc." corporationID="1000006" allianceID="0" allianceName="" factionID="0" factionName="" />
+      <row name="Sgt Telion" characterID="104298607" corporationName="EveHQ.co Team" corporationID="98389765" allianceID="0" allianceName="" factionID="0" factionName="" />
+      <row name="Slivo" characterID="1510858380" corporationName="Beehive Surveillance" corporationID="1390846542" allianceID="99007175" allianceName="X877." factionID="0" factionName="" />
+    </rowset>
+  </result>
+  <cachedUntil>2017-02-07 09:12:25</cachedUntil>
+</eveapi>
+
+
+
+https://api.eveonline.com/char/Notifications.xml.aspx?characterID=CHARID&keyID=APIKEYID&vCode=APIVCODE
+
+
+<?xml version='1.0' encoding='UTF-8'?>
+<eveapi version="2">
+  <currentTime>2017-02-07 08:19:09</currentTime>
+  <result>
+    <rowset name="notifications" key="notificationID" columns="notificationID,typeID,senderID,senderName,sentDate,read">
+      <row notificationID="611329110" typeID="186" senderID="1000137" senderName="DED" sentDate="2017-02-05 22:25:00" read="1" />
+      <row notificationID="611321390" typeID="184" senderID="1000137" senderName="DED" sentDate="2017-02-05 21:54:00" read="1" />
+      <row notificationID="611255003" typeID="128" senderID="96407354" senderName="Aktern" sentDate="2017-02-05 18:12:00" read="1" />
+      <row notificationID="611254334" typeID="16" senderID="96407354" senderName="Aktern" sentDate="2017-02-05 18:10:00" read="1" />
+      <row notificationID="611163842" typeID="1030" senderID="1000125" senderName="CONCORD" sentDate="2017-02-05 11:50:00" read="1" />
+    </rowset>
+  </result>
+  <cachedUntil>2017-02-07 08:46:09</cachedUntil>
+</eveapi>
