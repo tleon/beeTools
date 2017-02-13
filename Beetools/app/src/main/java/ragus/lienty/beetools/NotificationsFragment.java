@@ -9,23 +9,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class SkillQueue extends Fragment {
-
+public class NotificationsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
 
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public SkillQueue() {
+    public NotificationsFragment() {
         // Required empty public constructor
     }
 
-
-    public static SkillQueue newInstance(String param1, String param2) {
-        SkillQueue fragment = new SkillQueue();
+    public static NotificationsFragment newInstance(String param1, String param2) {
+        NotificationsFragment fragment = new NotificationsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -46,8 +45,9 @@ public class SkillQueue extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_skill_queue, container, false);
+        return inflater.inflate(R.layout.fragment_notifications, container, false);
     }
+
 
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

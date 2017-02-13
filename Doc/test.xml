@@ -1,0 +1,10 @@
+<eveapi version="2">
+<currentTime>2017-02-13 20:07:42</currentTime>
+<result>
+<rowset name="characters" key="characterID" columns="name,characterID,corporationName,corporationID,allianceID,allianceName,factionID,factionName">
+<row name="Lienty Ragus" characterID="96407612" corporationName="Beehive Surveillance" corporationID="1390846542" allianceID="99007175" allianceName="X877." factionID="0" factionName=""/>
+<row name="Eith0s" characterID="2112385193" corporationName="Federal Navy Academy" corporationID="1000168" allianceID="0" allianceName="" factionID="0" factionName=""/>
+</rowset>
+</result>
+<cachedUntil>2017-02-13 20:41:24</cachedUntil>
+</eveapi>

@@ -1,15 +1,10 @@
 package ragus.lienty.beetools;
 
-import android.app.Notification;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.NavUtils;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,8 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener , Account.OnFragmentInteractionListener,
-        Character.OnFragmentInteractionListener, Settings.OnFragmentInteractionListener, SkillQueue.OnFragmentInteractionListener, Notifications.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener , AccountFragment.OnFragmentInteractionListener,
+        CharacterFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener, SkillQueueFragment.OnFragmentInteractionListener, NotificationsFragment.OnFragmentInteractionListener{
 
     private final Handler mDrawerHandler = new Handler();
 
@@ -79,11 +74,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            fragmentClass = Account.class;
+            fragmentClass = AccountFragment.class;
         } else if (id == R.id.nav_gallery) {
-            fragmentClass = Character.class;
+            fragmentClass = CharacterFragment.class;
         } else if (id == R.id.nav_slideshow) {
-            fragmentClass = Settings.class;
+            fragmentClass = SettingsFragment.class;
         }
         buildFragment(fragmentClass);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
