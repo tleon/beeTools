@@ -1,23 +1,31 @@
 package ragus.lienty.beetools;
 
 
+import com.j256.ormlite.field.DatabaseField;
+
+import java.util.Date;
+
 /**
  * Created by Tom on 13/02/2017.
  */
 
 public class Characters {
-    protected int charId, accId;
-    protected String name, expireCacheDate, rootElement ;
-    protected boolean isActive;
-
-
-
+    @DatabaseField(id = true, columnName = "charId")
+    public int charId;
+    @DatabaseField (canBeNull = false, foreign = true, foreignAutoRefresh = true)
+    public Account accId;
+    @DatabaseField
+    public String name;
+    @DatabaseField
+    public Date expireCacheDate;
+    @DatabaseField
+    public boolean isActive;
 
     public void Characters(){
 
     }
 
-    public void Characters(int charId, String name, int accId, boolean isActive, String expireCacheDate){
+    public void Characters(int charId, String name, Account accId, boolean isActive, Date expireCacheDate){
         this.charId = charId;
         this.name = name;
         this.accId = accId;
@@ -29,7 +37,7 @@ public class Characters {
         this.charId = charId;
     }
 
-    public void setAccId(int accId) {
+    public void setAccId(Account accId) {
         this.accId = accId;
     }
 
@@ -37,7 +45,7 @@ public class Characters {
         this.name = name;
     }
 
-    public void setExpireCacheDate(String expireCacheDate) {
+    public void setExpireCacheDate(Date expireCacheDate) {
         this.expireCacheDate = expireCacheDate;
     }
 
@@ -49,7 +57,7 @@ public class Characters {
         return charId;
     }
 
-    public int getAccId() {
+    public Account getAccId() {
         return accId;
     }
 
@@ -57,7 +65,7 @@ public class Characters {
         return name;
     }
 
-    public String getExpireCacheDate() {
+    public Date getExpireCacheDate() {
         return expireCacheDate;
     }
 

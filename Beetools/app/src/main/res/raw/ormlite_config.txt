@@ -1,0 +1,106 @@
+#
+# generated on 2017/02/14 03:26:24
+#
+# --table-start--
+dataClass=ragus.lienty.beetools.Account
+tableName=account
+# --table-fields-start--
+# --field-start--
+fieldName=accID
+columnName=accId
+id=true
+# --field-end--
+# --field-start--
+fieldName=keyApi
+# --field-end--
+# --field-start--
+fieldName=vCode
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=ragus.lienty.beetools.Characters
+tableName=characters
+# --table-fields-start--
+# --field-start--
+fieldName=charId
+columnName=charId
+id=true
+# --field-end--
+# --field-start--
+fieldName=accId
+canBeNull=false
+foreign=true
+foreignAutoRefresh=true
+maxForeignAutoRefreshLevel=2
+# --field-end--
+# --field-start--
+fieldName=name
+# --field-end--
+# --field-start--
+fieldName=expireCacheDate
+# --field-end--
+# --field-start--
+fieldName=isActive
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=ragus.lienty.beetools.Notifications
+tableName=notifications
+# --table-fields-start--
+# --field-start--
+fieldName=notifId
+id=true
+# --field-end--
+# --field-start--
+fieldName=notifType
+# --field-end--
+# --field-start--
+fieldName=senderId
+# --field-end--
+# --field-start--
+fieldName=charId
+canBeNull=false
+foreign=true
+foreignAutoRefresh=true
+maxForeignAutoRefreshLevel=2
+# --field-end--
+# --field-start--
+fieldName=senderName
+# --field-end--
+# --field-start--
+fieldName=sentDate
+# --field-end--
+# --field-start--
+fieldName=isRead
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=ragus.lienty.beetools.NotificationSettings
+tableName=notificationsettings
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=charId
+canBeNull=false
+foreign=true
+foreignAutoRefresh=true
+maxForeignAutoRefreshLevel=2
+# --field-end--
+# --field-start--
+fieldName=notifType
+# --field-end--
+# --field-start--
+fieldName=disable
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

@@ -2,6 +2,8 @@ package ragus.lienty.beetools;
 
 import android.support.v4.app.Fragment;
 
+import com.j256.ormlite.field.DatabaseField;
+
 import java.util.List;
 
 /**
@@ -9,10 +11,15 @@ import java.util.List;
  */
 
 public class Account{
+    @DatabaseField(id = true, columnName = "accId")
+    public int accID;
+    @DatabaseField
+    public String keyApi;
+    @DatabaseField
+    public String vCode;
 
-    protected int accID;
-    protected String keyApi, vCode;
-    protected List characters;
+    public List characters;
+
 
     public Account() { // empty constructeur for ORM / DOA
     }
