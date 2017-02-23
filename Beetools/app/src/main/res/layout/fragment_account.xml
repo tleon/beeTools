@@ -11,6 +11,84 @@
         android:layout_height="wrap_content"
         android:text="Account"
         android:textSize="30dp"
-        android:layout_gravity="center_horizontal|center_vertical" />
+        android:layout_gravity="center_horizontal" />
+    <Button
+        android:textSize="@android:dimen/app_icon_size"
+        android:text="Sync Api"
+        android:background="@color/colorPrimaryDark"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tSyncApi"
+        android:layout_marginTop="100dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:layout_gravity="bottom">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Char_Id : "
+            android:id="@+id/tCharId0"
+            android:textSize="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name : "
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/tName0" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AccId : "
+            android:layout_marginTop="40dp"
+            android:textSize="20dp"
+            android:id="@+id/tAccid0"/> // char0
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Char_Id : "
+            android:id="@+id/tCharId1"
+            android:textSize="20dp"
+            android:layout_marginTop="70dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name : "
+            android:textSize="20dp"
+            android:layout_marginTop="90dp"
+            android:id="@+id/tName1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AccId : "
+            android:layout_marginTop="110dp"
+            android:textSize="20dp"
+            android:id="@+id/tAccid1"/> //char1
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Char_Id : "
+            android:id="@+id/tCharId2"
+            android:layout_marginTop="140dp"
+            android:textSize="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name : "
+            android:textSize="20dp"
+            android:layout_marginTop="160dp"
+            android:id="@+id/tName2" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AccId : "
+            android:layout_marginTop="180dp"
+            android:textSize="20dp"
+            android:id="@+id/tAccid2"/>//char2
+    </RelativeLayout>
 </FrameLayout>

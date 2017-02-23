@@ -3,27 +3,29 @@ package ragus.lienty.beetools;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AccountFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AccountFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AccountFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -33,15 +35,6 @@ public class AccountFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AccountFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static AccountFragment newInstance(String param1, String param2) {
         AccountFragment fragment = new AccountFragment();
         Bundle args = new Bundle();
@@ -60,6 +53,7 @@ public class AccountFragment extends Fragment {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,11 +61,28 @@ public class AccountFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_account, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        Button syncBtn = (Button) view.findViewById(R.id.tSyncApi);
+        syncBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View view){
+                //action on click
+                try {
+                    displayChar(XmlParser.extractXMLString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //Toast.makeText(getActivity(), "test toast btn", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -91,18 +102,60 @@ public class AccountFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
+    public void displayChar(List<Map> mapTab){
+        Map<String, String> hm;
+        String tmp ="";
+        if (!(mapTab.get(0).isEmpty())) {
+            hm = mapTab.get(0);
+            TextView name0 = (TextView) getView().findViewById(R.id.tName0);
+            TextView charId0 = (TextView) getView().findViewById(R.id.tCharId0);
+            TextView accId0 = (TextView) getView().findViewById(R.id.tAccid0);
+            tmp = name0.getText().toString();
+            name0.setText(tmp + " " + hm.get("name"));
+
+            tmp = charId0.getText().toString();
+            charId0.setText(tmp + " " + hm.get("characterID"));
+
+            tmp = accId0.getText().toString();
+            accId0.setText(tmp + " " + hm.get("corporationID"));
+        }
+
+        if (!(mapTab.get(1).isEmpty())) {
+            hm = mapTab.get(1);
+            TextView name1 = (TextView) getView().findViewById(R.id.tName1);
+            TextView charId1 = (TextView) getView().findViewById(R.id.tCharId1);
+            TextView accId1 = (TextView) getView().findViewById(R.id.tAccid1);
+            tmp = name1.getText().toString();
+            name1.setText(tmp + " " + hm.get("name"));
+
+            tmp = charId1.getText().toString();
+            charId1.setText(tmp + " " + hm.get("characterID"));
+
+            tmp = accId1.getText().toString();
+            accId1.setText(tmp + " " + hm.get("corporationID"));
+        }
+
+        if (!(mapTab.get(2).isEmpty())) {
+            hm = mapTab.get(2);
+            TextView name2 = (TextView) getView().findViewById(R.id.tName2);
+            TextView charId2 = (TextView) getView().findViewById(R.id.tCharId2);
+            TextView accId2 = (TextView) getView().findViewById(R.id.tAccid2);
+            tmp = name2.getText().toString();
+            name2.setText(tmp + " " + hm.get("name"));
+
+            tmp = charId2.getText().toString();
+            charId2.setText(tmp + " " + hm.get("characterID"));
+
+            tmp = accId2.getText().toString();
+            accId2.setText(tmp + " " + hm.get("corporationID"));
+        }
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }
