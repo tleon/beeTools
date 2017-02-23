@@ -1,6 +1,9 @@
 package ragus.lienty.beetools;
 
+import android.app.Activity;
 import android.os.AsyncTask;
+import android.widget.Toast;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -16,6 +19,7 @@ import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.xml.parsers.DocumentBuilder;
@@ -31,12 +35,10 @@ public class XmlParser {
 
 
 
-    public static List<Map> extractXMLString() throws SAXException, IOException, ParserConfigurationException {
+    public static List<Map> extractXMLString() throws SAXException, IOException, ParserConfigurationException, ExecutionException, InterruptedException {
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        HttpReq task = new HttpReq();
-        task.execute();
-        String rep = task.doInBackground();
+        String rep = new HttpReq().execute(webQuery).get();
         Document doc = dBuilder.parse(new InputSource(new ByteArrayInputStream(rep.getBytes("utf-8"))));
         doc.getDocumentElement().normalize();
         //Doc Builder and factory
@@ -52,25 +54,27 @@ public class XmlParser {
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
                 for(int i = 0; i < columns.length; i++){
-                   // System.out.println(columns[i] + " : " + eElement.getAttribute(columns[i]));
                     hm.put(columns[i], eElement.getAttribute(columns[i]));
                 }
-            mapTab.add(temp, hm);
             }
+            mapTab.add(temp, hm);//Null pointer exeption here Wtf !
         }
         return mapTab;
     }
 
-    private static class HttpReq extends AsyncTask<String, String ,String>{
+    private static class HttpReq extends AsyncTask<String, Void ,String>{
+
+
         @Override
         protected String doInBackground(String... params) {
 
             String source ="";
+            String query = params[0];
             URL oracle = null;
             try {
-                oracle = new URL(webQuery);
+                oracle = new URL(query);
             //https
-            URLConnection yc = oracle.openConnection();
+             HttpsURLConnection  yc = (HttpsURLConnection )oracle.openConnection();
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
                             yc.getInputStream()));
@@ -84,6 +88,11 @@ public class XmlParser {
                 e.printStackTrace();
                 return "";
             }
+        }
+
+        @Override
+        protected void onPostExecute(String result){
+            super.onPostExecute(result);
         }
     }
 
