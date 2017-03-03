@@ -10,33 +10,5 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ragus.lienty.asynctask.MainActivity">
 
-    <EditText
-        android:hint="API Key"
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/keyField" />
-    <EditText
-        android:hint="Verification Code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/keyField"
-        android:id="@+id/vCodeField"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stop Service"
-        android:id="@+id/loadBtn"
-        android:layout_below="@+id/vCodeField"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/loadBtn"
-        android:layout_marginLeft="15dp"
-        android:text="Check Status"
-        android:layout_alignBottom="@+id/loadBtn"
-        android:id="@+id/statusBtn"/>
-
 
 </RelativeLayout>

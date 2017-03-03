@@ -32,7 +32,6 @@ public class ServiceApi extends IntentService {
         Log.d("ServiceApi", "Service Running");
     }
 
-
     public void task(Intent intent){
         Bundle extras = intent.getExtras();
         if (extras == null){

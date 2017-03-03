@@ -18,83 +18,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-
 public class MainActivity extends AppCompatActivity {
-
-
-    String keyId;
-    String vCode;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d("MA","test");
-        keyId = tmpkeyId;
-        vCode = tmpvCode;
-
         Intent serviceIntent = new Intent(this,ServiceApi.class);
-        serviceIntent.putExtra("keyId",keyId);
-        serviceIntent.putExtra("vCode",vCode);
+        serviceIntent.putExtra("keyId","");
+        serviceIntent.putExtra("vCode","");
         startService(serviceIntent);
 
         AlarmRegister.setAlarm(this);
-
-        Button loadBtn = (Button)findViewById(R.id.loadBtn);
-        loadBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                //Stop service
-                Intent intent = new Intent(MainActivity.this, AlarmReceiver.class);
-                final PendingIntent pIntent = PendingIntent.getBroadcast(getApplicationContext(),0,
-                        intent, 0);
-                AlarmManager alarm = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-                alarm.cancel(pIntent);
-                stopService(new Intent(MainActivity.this, ServiceApi.class));
-            }
-        });
-
-        Button statusBtn = (Button)findViewById(R.id.statusBtn);
-        statusBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean test = isMyServiceRunning(getApplicationContext());
-                if (test){
-                    Toast.makeText(getApplicationContext(),"Service Is Running", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(getApplicationContext(),"Service Is Stopped", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    protected  void submitApi(){
-        EditText keyField = (EditText)findViewById(R.id.keyField);
-        EditText vCodeField = (EditText)findViewById(R.id.vCodeField);
-
-        keyId = keyField.getText().toString();
-        vCode = vCodeField.getText().toString();
-
-    }
-
-
-
-
-
-    private boolean isMyServiceRunning(Context mContext) {
-        ActivityManager manager = (ActivityManager) mContext
-                .getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager
-                .getRunningServices(Integer.MAX_VALUE)) {
-            if (ServiceApi.class.getName().equals(
-            service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
     }
 }
 

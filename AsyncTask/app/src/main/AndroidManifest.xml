@@ -16,22 +16,17 @@
 
 
         <activity android:name=".MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.BOOT_COMPLETED"></action>
             </intent-filter>
         </activity>
-        <receiver android:name=".AlarmReceiver"
-            android:process=":remote">
-        </receiver>
-        <receiver android:name=".AutoStartReceiver"
-            android:process=":remote">
-        </receiver>
-        <service android:name=".ServiceApi"
-            android:enabled="true"
-            android:exported="true" />
+
+        <receiver android:name=".AlarmReceiver" android:process=":remote"></receiver>
+        <receiver android:name=".AutoStartReceiver" android:process=":remote"></receiver>
+
+        <service android:name=".ServiceApi" android:enabled="true" android:exported="true" />
     </application>
 
 </manifest>
