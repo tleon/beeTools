@@ -46,7 +46,7 @@ public class Character {
         this.mList = getNotif(key, verif);
         String[] tmpTab;
 
-        for (int i=0; i < this.mList.size() -1; i++){
+        for (int i=0; i < this.mList.size() ; i++){
             tmpTab = this.mList.get(i)
                     .trim()
                     .split(",");

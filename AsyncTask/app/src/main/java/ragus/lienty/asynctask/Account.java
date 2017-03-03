@@ -1,5 +1,7 @@
 package ragus.lienty.asynctask;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -27,7 +29,7 @@ public class Account {
 
     private ArrayList<String> getChar(){
 
-        ArrayList<String> list = null;
+        ArrayList<String> list = new ArrayList<String>();
 
         try {
             list = XmlParser.extractXMLchar(this.apiKey, this.vCode);
@@ -44,12 +46,16 @@ public class Account {
         String[] tmpTab;
         String [] apiInfos = {this.apiKey, this.vCode};
 
-        for (int i=0; i < this.mList.size(); i++){
-            tmpTab = this.mList.get(i)
-                    .trim()
-                    .split(",");
-            Character c = new Character(tmpTab[0],tmpTab[1],tmpTab[2], apiInfos);
-            this.listChar.add(c);
+        if (this.mList != null) {
+            for (int i = 0; i < this.mList.size(); i++) {
+                tmpTab = this.mList.get(i)
+                        .trim()
+                        .split(",");
+                Character c = new Character(tmpTab[0], tmpTab[1], tmpTab[2], apiInfos);
+                this.listChar.add(c);
+            }
+        } else {
+            Log.d("ERROR", "CHAR LIST EMPTY");
         }
     }
 
