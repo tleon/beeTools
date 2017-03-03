@@ -36,30 +36,12 @@ public class MainActivity extends AppCompatActivity {
         keyId = tmpkeyId;
         vCode = tmpvCode;
 
-        Intent intent = new Intent(this,AlarmReceiver.class);
-        intent.putExtra("keyId",keyId);
-        intent.putExtra("vCode",vCode);
-
         Intent serviceIntent = new Intent(this,ServiceApi.class);
         serviceIntent.putExtra("keyId",keyId);
         serviceIntent.putExtra("vCode",vCode);
-
         startService(serviceIntent);
 
-        final PendingIntent pIntent = PendingIntent
-                .getBroadcast(this,123456789, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarm.setInexactRepeating(
-            AlarmManager.RTC_WAKEUP,
-            System.currentTimeMillis()+ AlarmManager.INTERVAL_HALF_HOUR / 30,
-            AlarmManager.INTERVAL_HALF_HOUR /30,
-            pIntent
-        );
-        //+ (AlarmManager.INTERVAL_HALF_HOUR / 30)
-
-
-
+        AlarmRegister.setAlarm(this);
 
         Button loadBtn = (Button)findViewById(R.id.loadBtn);
         loadBtn.setOnClickListener(new View.OnClickListener(){
