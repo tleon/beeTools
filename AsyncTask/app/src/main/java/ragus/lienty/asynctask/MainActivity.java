@@ -21,8 +21,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    String tmpkeyId = "5259527";
-    String tmpvCode = "tDpJsVRltuilMdhc6Q8sSSBy4F3lJaByiZDibfoUbPhEIJ0kgDBgU6SqFDC0KSWs";
+
     String keyId;
     String vCode;
 
@@ -46,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
         AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         alarm.setInexactRepeating(
                 AlarmManager.RTC_WAKEUP,
-                System.currentTimeMillis()+ AlarmManager.INTERVAL_HALF_HOUR / 12,
-                AlarmManager.INTERVAL_HALF_HOUR + (AlarmManager.INTERVAL_HALF_HOUR / 12),
+                System.currentTimeMillis()+ AlarmManager.INTERVAL_HALF_HOUR / 30,
+                AlarmManager.INTERVAL_HALF_HOUR + (AlarmManager.INTERVAL_HALF_HOUR / 30),
                 pIntent);
 
 
