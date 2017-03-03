@@ -27,7 +27,7 @@
         </receiver>
         <service android:name=".ServiceApi"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -16,10 +16,11 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
+        Log.d("AlarmReceiver","Brodcast received");
         Intent i = new Intent(context, ServiceApi.class);
         i.putExtra("keyId",(String) bundle.get("keyId"));
         i.putExtra("vCode",(String) bundle.get("vCode"));
         context.startService(i);
-        Log.d("AlarmReceiver","Brodcast received");
+
     }
 }

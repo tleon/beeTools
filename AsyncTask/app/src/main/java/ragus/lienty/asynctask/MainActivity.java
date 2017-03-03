@@ -32,26 +32,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        keyId = tmpkeyId;
+        vCode = tmpvCode;
+
+        Intent intent = new Intent(this,AlarmReceiver.class);
+        intent.putExtra("keyId",keyId);
+        intent.putExtra("vCode",vCode);
+
+        final PendingIntent pIntent = PendingIntent
+                .getBroadcast(this,123456789, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarm.setInexactRepeating(
+                AlarmManager.RTC_WAKEUP,
+                System.currentTimeMillis()+ AlarmManager.INTERVAL_HALF_HOUR / 12,
+                AlarmManager.INTERVAL_HALF_HOUR + (AlarmManager.INTERVAL_HALF_HOUR / 12),
+                pIntent);
+
+
+
+
         Button syncBtn = (Button)findViewById(R.id.syncBTN);
         syncBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick (View view){
                 //Start service
-                submitApi();
-                TextView t =(TextView)findViewById(R.id.syncTxtView);
-                Intent intent = new Intent(MainActivity.this,AlarmReceiver.class);
-                intent.putExtra("keyId",keyId);
-                intent.putExtra("vCode",vCode);
 
-                final PendingIntent pIntent = PendingIntent
-                        .getBroadcast(getApplicationContext(),0, intent, 0 );
 
-                AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-                alarm.setInexactRepeating(
-                        AlarmManager.RTC_WAKEUP,
-                        System.currentTimeMillis()+ AlarmManager.INTERVAL_HALF_HOUR / 6,
-                        AlarmManager.INTERVAL_HALF_HOUR + (AlarmManager.INTERVAL_HALF_HOUR / 6),
-                        pIntent);
 
             }
         });
@@ -74,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Stop service
-                Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                Intent intent = new Intent(MainActivity.this, AlarmReceiver.class);
                 final PendingIntent pIntent = PendingIntent.getBroadcast(getApplicationContext(),0,
                         intent, 0);
                 AlarmManager alarm = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
@@ -109,6 +117,10 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"Box is not working ATM", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
+
 
     private boolean isMyServiceRunning(Context mContext) {
         ActivityManager manager = (ActivityManager) mContext

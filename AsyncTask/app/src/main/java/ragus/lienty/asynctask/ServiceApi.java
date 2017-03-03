@@ -66,7 +66,6 @@ public class ServiceApi extends IntentService {
     protected void iterateNotifications() {
 
         Account account = new Account(this.keyId, this.vCode);
-        List<String> notificationStrings = new ArrayList<String>(); // c'est quoi pk c'est pas utilisé ?
 
         for(int i = 0 ; i < account.getListChar().size(); i++){ // tab de 3 pilotes
 
