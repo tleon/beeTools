@@ -19,7 +19,7 @@ public class CharacterFragment extends Fragment{
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener; //this
 
     public CharacterFragment() {
         // Required empty public constructor
@@ -57,7 +57,7 @@ public class CharacterFragment extends Fragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        Button skillQueueBtn = (Button) view.findViewById(R.id.tSkillQueue);
+        Button skillQueueBtn = (Button) view.findViewById(R.id.tSkillQueue);		//this
         skillQueueBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick (View view){

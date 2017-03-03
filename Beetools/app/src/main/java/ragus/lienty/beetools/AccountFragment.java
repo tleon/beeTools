@@ -108,52 +108,54 @@ public class AccountFragment extends Fragment {
         String tmp ="";
         if (!(mapTab.get(0).isEmpty())) {
             hm = mapTab.get(0);
+
             TextView name0 = (TextView) getView().findViewById(R.id.tName0);
-            TextView charId0 = (TextView) getView().findViewById(R.id.tCharId0);
-            TextView accId0 = (TextView) getView().findViewById(R.id.tAccid0);
             tmp = name0.getText().toString();
             name0.setText(tmp + " " + hm.get("name"));
 
+            TextView charId0 = (TextView) getView().findViewById(R.id.tCharId0);
             tmp = charId0.getText().toString();
             charId0.setText(tmp + " " + hm.get("characterID"));
 
+            TextView accId0 = (TextView) getView().findViewById(R.id.tAccid0);
             tmp = accId0.getText().toString();
             accId0.setText(tmp + " " + hm.get("corporationID"));
         }
 
         if (!(mapTab.get(1).isEmpty())) {
             hm = mapTab.get(1);
+
             TextView name1 = (TextView) getView().findViewById(R.id.tName1);
-            TextView charId1 = (TextView) getView().findViewById(R.id.tCharId1);
-            TextView accId1 = (TextView) getView().findViewById(R.id.tAccid1);
             tmp = name1.getText().toString();
             name1.setText(tmp + " " + hm.get("name"));
 
+            TextView charId1 = (TextView) getView().findViewById(R.id.tCharId1);
             tmp = charId1.getText().toString();
             charId1.setText(tmp + " " + hm.get("characterID"));
 
+            TextView accId1 = (TextView) getView().findViewById(R.id.tAccid1);
             tmp = accId1.getText().toString();
             accId1.setText(tmp + " " + hm.get("corporationID"));
         }
 
         if (!(mapTab.get(2).isEmpty())) {
             hm = mapTab.get(2);
+
             TextView name2 = (TextView) getView().findViewById(R.id.tName2);
-            TextView charId2 = (TextView) getView().findViewById(R.id.tCharId2);
-            TextView accId2 = (TextView) getView().findViewById(R.id.tAccid2);
             tmp = name2.getText().toString();
             name2.setText(tmp + " " + hm.get("name"));
 
+            TextView charId2 = (TextView) getView().findViewById(R.id.tCharId2);
             tmp = charId2.getText().toString();
             charId2.setText(tmp + " " + hm.get("characterID"));
 
+            TextView accId2 = (TextView) getView().findViewById(R.id.tAccid2);
             tmp = accId2.getText().toString();
             accId2.setText(tmp + " " + hm.get("corporationID"));
         }
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 

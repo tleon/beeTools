@@ -36,12 +36,13 @@ public class XmlParser {
 
 
     public static List<Map> extractXMLString() throws SAXException, IOException, ParserConfigurationException, ExecutionException, InterruptedException {
+        String rep = "";//retreiveXML(webQuery);
+        //Doc Builder and factory
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        String rep = new HttpReq().execute(webQuery).get();
         Document doc = dBuilder.parse(new InputSource(new ByteArrayInputStream(rep.getBytes("utf-8"))));
         doc.getDocumentElement().normalize();
-        //Doc Builder and factory
+        //node reader for eve XML
         NodeList nListCol = doc.getElementsByTagName("rowset");
         NodeList nList = doc.getElementsByTagName("row");
         Node nNodeCol = nListCol.item(0);
@@ -60,40 +61,6 @@ public class XmlParser {
             mapTab.add(temp, hm);//Null pointer exeption here Wtf !
         }
         return mapTab;
-    }
-
-    private static class HttpReq extends AsyncTask<String, Void ,String>{
-
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            String source ="";
-            String query = params[0];
-            URL oracle = null;
-            try {
-                oracle = new URL(query);
-            //https
-             HttpsURLConnection  yc = (HttpsURLConnection )oracle.openConnection();
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(
-                            yc.getInputStream()));
-            String inputLine;
-
-            while ((inputLine = in.readLine()) != null)
-                source +=inputLine;
-            in.close();
-            return source;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return "";
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String result){
-            super.onPostExecute(result);
-        }
     }
 
 }
