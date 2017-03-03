@@ -17,7 +17,7 @@ public class HttpsQuery extends AsyncTask<String, Void ,String> {
     @Override
     protected String doInBackground(String... params) {
 
-        String source ="";
+        String source = "";
         String query = params[0];
         URL oracle = null;
 
@@ -35,8 +35,8 @@ public class HttpsQuery extends AsyncTask<String, Void ,String> {
             return source;
 
         } catch (Exception e) {
-            e.printStackTrace();
-            return "";
+            //e.printStackTrace();
+            return null;
         }
     }
 

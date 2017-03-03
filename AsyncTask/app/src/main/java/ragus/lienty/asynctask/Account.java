@@ -2,15 +2,14 @@ package ragus.lienty.asynctask;
 
 import java.util.ArrayList;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 /**
  * Created by leone on 27/02/2017.
  */
 
 public class Account {
+
     private ArrayList<String> mList;
-    private ArrayList<Characters> listChar = new ArrayList<>();
+    private ArrayList<Character> listChar = new ArrayList<>();
     protected String apiKey;
     protected String vCode;
 
@@ -49,7 +48,7 @@ public class Account {
             tmpTab = this.mList.get(i)
                     .trim()
                     .split(",");
-            Characters c = new Characters(tmpTab[0],tmpTab[1],tmpTab[2], apiInfos);
+            Character c = new Character(tmpTab[0],tmpTab[1],tmpTab[2], apiInfos);
             this.listChar.add(c);
         }
     }
@@ -64,7 +63,7 @@ public class Account {
         return vCode;
     }
 
-    public ArrayList<Characters> getListChar() {
+    public ArrayList<Character> getListChar() {
         return listChar;
     }
 }

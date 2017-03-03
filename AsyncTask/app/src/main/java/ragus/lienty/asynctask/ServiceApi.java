@@ -69,11 +69,11 @@ public class ServiceApi extends IntentService {
 
         for(int i = 0 ; i < account.getListChar().size(); i++){ // tab de 3 pilotes
 
-            Characters chararacter = account.getListChar().get(i); // 1 pilote a chaque tour
+            Character character = account.getListChar().get(i); // 1 pilote a chaque tour
 
-            for (int j = 0 ; j < chararacter.getListNotif().size(); j++){       //tab de notif pour le pilote en cours
+            for (int j = 0 ; j < character.getListNotif().size(); j++){       //tab de notif pour le pilote en cours
 
-                Notifications notif = chararacter.getListNotif().get(j); // List notifs
+                EveNotif notif = character.getListNotif().get(j); // List notifs
                 Integer notifType = Integer.parseInt(notif.getNotifType()); //notif type
                 String text;
 
@@ -85,6 +85,7 @@ public class ServiceApi extends IntentService {
 
                     text = "Unknown notification type : " + notif.getNotifType();
                 }
+
                 sendNotification(text, notif.getNotifId());
             }
         }

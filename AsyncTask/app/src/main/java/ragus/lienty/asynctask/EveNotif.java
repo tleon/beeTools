@@ -6,18 +6,18 @@ import android.app.Notification;
  * Created by leone on 27/02/2017.
  */
 
-public class Notifications {
+public class EveNotif {
 
     private String notifId;
     private String notifType;
     private String read;
 
 
-    public Notifications(){
+    public EveNotif(){
         //Empty constructor for ORM
     }
 
-    public Notifications(String notifId, String notifType, String read){
+    public EveNotif(String notifId, String notifType, String read){
 
         this.notifId = notifId;
         this.notifType = notifType;
