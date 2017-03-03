@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        Log.d("MA","test");
         keyId = tmpkeyId;
         vCode = tmpvCode;
 
@@ -46,35 +47,12 @@ public class MainActivity extends AppCompatActivity {
         alarm.setInexactRepeating(
                 AlarmManager.RTC_WAKEUP,
                 System.currentTimeMillis()+ AlarmManager.INTERVAL_HALF_HOUR / 30,
-                AlarmManager.INTERVAL_HALF_HOUR + (AlarmManager.INTERVAL_HALF_HOUR / 30),
+                AlarmManager.INTERVAL_HALF_HOUR /30,
                 pIntent);
+        //+ (AlarmManager.INTERVAL_HALF_HOUR / 30)
 
 
 
-
-        Button syncBtn = (Button)findViewById(R.id.syncBTN);
-        syncBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick (View view){
-                //Start service
-
-
-
-            }
-        });
-
-        Button cheatBtn = (Button)findViewById(R.id.cheatBtn);
-        cheatBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                EditText keyField = (EditText)findViewById(R.id.keyField);
-                EditText vCodeField = (EditText)findViewById(R.id.vCodeField);
-                keyField.setText(tmpkeyId);
-                vCodeField.setText(tmpvCode);
-                submitApi();
-                Toast.makeText(getApplicationContext(),"Api submitted", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         Button loadBtn = (Button)findViewById(R.id.loadBtn);
         loadBtn.setOnClickListener(new View.OnClickListener(){
@@ -107,14 +85,10 @@ public class MainActivity extends AppCompatActivity {
     protected  void submitApi(){
         EditText keyField = (EditText)findViewById(R.id.keyField);
         EditText vCodeField = (EditText)findViewById(R.id.vCodeField);
-        CheckBox save = (CheckBox)findViewById(R.id.checkBox);
 
         keyId = keyField.getText().toString();
         vCode = vCodeField.getText().toString();
 
-        if (save.isChecked()){
-            Toast.makeText(this,"Box is not working ATM", Toast.LENGTH_SHORT).show();
-        }
     }
 
 
