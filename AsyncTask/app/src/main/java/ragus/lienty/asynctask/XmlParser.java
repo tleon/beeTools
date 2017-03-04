@@ -27,7 +27,7 @@ public class XmlParser {
     public static ArrayList<String> extractXMLchar(String keyID, String vCode) throws ParserConfigurationException, IOException, SAXException {
         String rep = "";
         HttpsQuery hQuery = new HttpsQuery();
-        String query = "https://api.eveonline.com/account/Character.xml.aspx?keyID=" + keyID + "&vCode=" + vCode;
+        String query = "https://api.eveonline.com/account/Characters.xml.aspx?keyID=" + keyID + "&vCode=" + vCode;
         try {
             rep = hQuery.execute(query).get();
             Log.d("XML parser Char", query);
