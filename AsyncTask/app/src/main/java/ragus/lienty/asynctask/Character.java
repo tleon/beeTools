@@ -8,10 +8,17 @@ import java.util.ArrayList;
 
 public class Character {
 
+    public void setCorpName(String corpName) {
+        this.corpName = corpName;
+    }
+
+    public void setCharId(String charId) {
+        this.charId = charId;
+    }
+
     private String corpName;
     private String charId;
     private String name;
-    private ArrayList<String> mList;
     private ArrayList<EveNotif> listNotif = new ArrayList<>();
 
     public Character(){
@@ -24,34 +31,14 @@ public class Character {
         this.corpName = corpName;
         this.name = name;
         this.charId = charId;
-        createNotif(apiInfos[0], apiInfos[1]);
-
     }
 
-    private ArrayList<String> getNotif(String key, String verif){
-
-        ArrayList<String> list = null;
+    public void retrieveNotifications(String key, String verif){
 
         try {
-            list = XmlParser.extractXMLNotif(key, verif, this);
+            this.listNotif = XmlParser.extractXMLNotif(key, verif, this);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        return list;
-    }
-
-    public void createNotif(String key, String verif){
-
-        this.mList = getNotif(key, verif);
-        String[] tmpTab;
-
-        for (int i=0; i < this.mList.size() ; i++){
-            tmpTab = this.mList.get(i)
-                    .trim()
-                    .split(",");
-            EveNotif n = new EveNotif(tmpTab[0],tmpTab[1],tmpTab[2]);
-            this.listNotif.add(n);
         }
     }
 

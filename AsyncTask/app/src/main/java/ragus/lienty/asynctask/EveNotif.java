@@ -8,20 +8,38 @@ import android.app.Notification;
 
 public class EveNotif {
 
+    public void setNotifId(String notifId) {
+        this.notifId = notifId;
+    }
+
+    public void setNotifType(String notifType) {
+        this.notifType = notifType;
+    }
+
     private String notifId;
     private String notifType;
     private String read;
+    private String senderName;
 
 
     public EveNotif(){
         //Empty constructor for ORM
     }
 
-    public EveNotif(String notifId, String notifType, String read){
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
+    public EveNotif(String notifId, String notifType, String read, String sender){
 
         this.notifId = notifId;
         this.notifType = notifType;
         this.read = read;
+        this.senderName = sender;
     }
 
     // Getter / Setter

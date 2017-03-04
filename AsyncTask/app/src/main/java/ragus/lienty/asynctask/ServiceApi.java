@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class ServiceApi extends IntentService {
         }
     }
 
-    private void sendNotification(String msg, String notifId) {
+    private void sendNotification(String msg, String notifId, String senderName) {
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -53,10 +54,10 @@ public class ServiceApi extends IntentService {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_launcher)
-                        .setContentTitle(notifId)
+                        .setContentTitle(msg)
                         .setStyle(new NotificationCompat.BigTextStyle()
                                 .bigText(msg))
-                        .setContentText(msg);
+                        .setContentText("From " + senderName);
 
         mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(Integer.parseInt(notifId), mBuilder.build());
@@ -65,27 +66,31 @@ public class ServiceApi extends IntentService {
     protected void iterateNotifications() {
 
         Account account = new Account(this.keyId, this.vCode);
+        account.retrieveCharacters();
 
-        for(int i = 0 ; i < account.getListChar().size(); i++){ // tab de 3 pilotes
+        for(int i = 0 ; i < account.getListChar().size(); i++){
 
-            Character character = account.getListChar().get(i); // 1 pilote a chaque tour
+            Character character = account.getListChar().get(i);
+            character.retrieveNotifications(account.getApiKey(), account.getvCode());
 
-            for (int j = 0 ; j < character.getListNotif().size(); j++){       //tab de notif pour le pilote en cours
+            for (int j = 0 ; j < character.getListNotif().size(); j++){
 
-                EveNotif notif = character.getListNotif().get(j); // List notifs
-                Integer notifType = Integer.parseInt(notif.getNotifType()); //notif type
+                EveNotif notification = character.getListNotif().get(j);
+                Integer notificationType = Integer.parseInt(notification.getNotifType());
                 String text;
 
-                if(StaticData.notificationTypes.containsKey(notifType)){
+                if(StaticData.notificationTypes.containsKey(notificationType)){
 
-                    text = StaticData.notificationTypes.get(notifType);
-                    Log.d("Service", "notif type = " + notifType + " text = " + text);
+                    text = StaticData.notificationTypes.get(notificationType);
+                    Log.d("Service", "notif type = " + notificationType + " text = " + text);
                 } else {
-
-                    text = "Unknown notification type : " + notif.getNotifType();
+                    text = "Unknown notification type : " + notification.getNotifType();
                 }
 
-                sendNotification(text, notif.getNotifId());
+                if (StorageManager.isNotificationNew(this,notification.getNotifId())) {
+                    sendNotification(text, notification.getNotifId(), notification.getSenderName());
+                    StorageManager.saveNotificationId(this,notification.getNotifId());
+                }
             }
         }
     }

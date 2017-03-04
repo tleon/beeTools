@@ -24,58 +24,83 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class XmlParser {
 
-    public static ArrayList<String> extractXMLchar(String keyID, String vCode) throws ParserConfigurationException, IOException, SAXException {
+    public static ArrayList<Character> extractXMLchar(String keyID, String vCode) throws ParserConfigurationException, IOException, SAXException {
+
         String rep = "";
         HttpsQuery hQuery = new HttpsQuery();
         String query = "https://api.eveonline.com/account/Characters.xml.aspx?keyID=" + keyID + "&vCode=" + vCode;
+
         try {
             rep = hQuery.execute(query).get();
             Log.d("XML parser Char", query);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(new InputSource(new ByteArrayInputStream(rep.getBytes("utf-8"))));
         doc.getDocumentElement().normalize();
         NodeList nList = doc.getElementsByTagName("row");
-        ArrayList<String> tab = new ArrayList<>();
-        for (int tmp = 0; tmp < nList.getLength(); tmp++) {
-            Node nNode = nList.item(tmp);
+
+        ArrayList<Character> chars = new ArrayList<>();
+
+        for (int i = 0; i < nList.getLength(); i++) {
+
+            Node nNode = nList.item(i);
+
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
                 Element eElement = (Element) nNode;
-                String tempo = eElement.getAttribute("name") + "," + eElement.getAttribute("corporationName") + "," + eElement.getAttribute("characterID")+ "\n";
-                tab.add(tmp, tempo);
+
+                Character character = new Character();
+                character.setName(eElement.getAttribute("name"));
+                character.setCorpName(eElement.getAttribute("corporationName"));
+                character.setCharId(eElement.getAttribute("characterID"));
+
+                chars.add(i, character);
             }
         }
-        return tab;
+        return chars;
     }
 
-    public static ArrayList<String> extractXMLNotif(String keyID, String vCode, Character toon) throws ParserConfigurationException, IOException, SAXException {
+    public static ArrayList<EveNotif> extractXMLNotif(String keyID, String vCode, Character toon) throws ParserConfigurationException, IOException, SAXException {
+
         String rep = "";
         HttpsQuery hQuery = new HttpsQuery();
-        String query = "https://api.eveonline.com/char/EveNotif.xml.aspx?characterID=" + toon.getCharId() + "&keyID=" + keyID + "&vCode=" + vCode;
+        String query = "https://api.eveonline.com/char/Notifications.xml.aspx?characterID=" + toon.getCharId() + "&keyID=" + keyID + "&vCode=" + vCode;
+
         try {
            rep = hQuery.execute(query).get();
             Log.d("XML parser Notif", query);
         } catch (Exception e) {
            e.printStackTrace();
         }
+
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(new InputSource(new ByteArrayInputStream(rep.getBytes("utf-8"))));
         doc.getDocumentElement().normalize();
         NodeList nList = doc.getElementsByTagName("row");
-        ArrayList<String> tab = new ArrayList<>();
-        for (int tmp = 0; tmp < nList.getLength(); tmp++) {
-            Node nNode = nList.item(tmp);
+        ArrayList<EveNotif> notifications = new ArrayList<>();
+
+        for (int i = 0; i < nList.getLength(); i++) {
+
+            Node nNode = nList.item(i);
+
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
-                String tempo = eElement.getAttribute("notificationID")+ "," + eElement.getAttribute("typeID")  + "," + eElement.getAttribute("read") + "\n";
-                tab.add(tmp, tempo);
+
+                EveNotif notification = new EveNotif();
+                notification.setNotifId(eElement.getAttribute("notificationID"));
+                notification.setNotifType(eElement.getAttribute("typeID"));
+                notification.setRead(eElement.getAttribute("read"));
+                notification.setSenderName(eElement.getAttribute("senderName"));
+
+                notifications.add(i, notification);
             }
         }
-        return tab;
+        return notifications;
     }
 }
 

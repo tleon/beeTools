@@ -16,7 +16,7 @@ public class AutoStartReceiver extends BroadcastReceiver {
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED"))
         {
             Log.d("AutoStartReceiver", "Triggered");
-            AlarmRegister.setAlarm(context);
+            AlarmReceiver.setAlarm(context);
         }
     }
 }
