@@ -34,14 +34,8 @@ public class ServiceApi extends IntentService {
     }
 
     public void task(Intent intent){
-        Bundle extras = intent.getExtras();
-        if (extras == null){
-            Log.d("EXTRA", "Nothing in here");
-        }else{
-            this.keyId = (String) extras.get("keyId");
-            this.vCode = (String) extras.get("vCode");
-            iterateNotifications();
-        }
+
+        iterateNotifications();
     }
 
     private void sendNotification(String msg, String notifId, String senderName) {
@@ -65,13 +59,13 @@ public class ServiceApi extends IntentService {
 
     protected void iterateNotifications() {
 
-        Account account = new Account(this.keyId, this.vCode);
+        Account account = new Account(StorageManager.getStoredApi(this.getApplicationContext()));
         account.retrieveCharacters();
 
         for(int i = 0 ; i < account.getListChar().size(); i++){
 
             Character character = account.getListChar().get(i);
-            character.retrieveNotifications(account.getApiKey(), account.getvCode());
+            character.retrieveNotifications(account.getApi());
 
             for (int j = 0 ; j < character.getListNotif().size(); j++){
 
@@ -82,7 +76,7 @@ public class ServiceApi extends IntentService {
                 if(StaticData.notificationTypes.containsKey(notificationType)){
 
                     text = StaticData.notificationTypes.get(notificationType);
-                    Log.d("Service", "notif type = " + notificationType + " text = " + text);
+                    //Log.d("Service", "notif type = " + notificationType + " text = " + text);
                 } else {
                     text = "Unknown notification type : " + notification.getNotifType();
                 }

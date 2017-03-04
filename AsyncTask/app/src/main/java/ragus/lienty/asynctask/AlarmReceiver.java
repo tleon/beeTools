@@ -17,31 +17,29 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Bundle bundle = intent.getExtras();
-        Log.d("AlarmReceiver","Brodcast received");
         Intent i = new Intent(context, ServiceApi.class);
-        i.putExtra("keyId",(String) bundle.get("keyId"));
-        i.putExtra("vCode",(String) bundle.get("vCode"));
+        Log.d("AlarmReceiver", "Broadcast Reveived");
         context.startService(i);
-
     }
 
     public static void setAlarm (Context context) {
 
         Log.d("AlarmReceiver", "Set Alarm");
-        Intent intent = new Intent(context,AlarmReceiver.class);
-        intent.putExtra("keyId","");
-        intent.putExtra("vCode","");
+        Intent intent = new Intent(context, AlarmReceiver.class);
 
-        final PendingIntent pIntent = PendingIntent
-                .getBroadcast(context,123456789, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        final PendingIntent pIntent = PendingIntent.getBroadcast(
+            context,
+            123456789,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        );
 
         AlarmManager alarm = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         alarm.setInexactRepeating(
-                AlarmManager.RTC_WAKEUP,
-                System.currentTimeMillis()+ AlarmManager.INTERVAL_HALF_HOUR / 30,
-                AlarmManager.INTERVAL_HALF_HOUR,
-                pIntent
+            AlarmManager.RTC_WAKEUP,
+            System.currentTimeMillis()+ AlarmManager.INTERVAL_HALF_HOUR / 30,
+            AlarmManager.INTERVAL_HALF_HOUR / 30,
+            pIntent
         );
     }
 }

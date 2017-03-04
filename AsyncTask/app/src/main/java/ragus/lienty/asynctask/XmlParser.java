@@ -24,11 +24,13 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class XmlParser {
 
-    public static ArrayList<Character> extractXMLchar(String keyID, String vCode) throws ParserConfigurationException, IOException, SAXException {
+    public static ArrayList<Character> extractXMLchar(EveAPI api) throws ParserConfigurationException, IOException, SAXException {
 
         String rep = "";
         HttpsQuery hQuery = new HttpsQuery();
-        String query = "https://api.eveonline.com/account/Characters.xml.aspx?keyID=" + keyID + "&vCode=" + vCode;
+        String query = "https://api.eveonline.com/account/Characters.xml.aspx?" +
+                "keyID=" + api.getKeyId() +
+                "&vCode=" + api.getvCode();
 
         try {
             rep = hQuery.execute(query).get();
@@ -64,11 +66,14 @@ public class XmlParser {
         return chars;
     }
 
-    public static ArrayList<EveNotif> extractXMLNotif(String keyID, String vCode, Character toon) throws ParserConfigurationException, IOException, SAXException {
+    public static ArrayList<EveNotif> extractXMLNotif(EveAPI api, Character toon) throws ParserConfigurationException, IOException, SAXException {
 
         String rep = "";
         HttpsQuery hQuery = new HttpsQuery();
-        String query = "https://api.eveonline.com/char/Notifications.xml.aspx?characterID=" + toon.getCharId() + "&keyID=" + keyID + "&vCode=" + vCode;
+        String query = "https://api.eveonline.com/char/Notifications.xml.aspx?" +
+                "characterID=" + toon.getCharId() +
+                "&keyID=" + api.getKeyId() +
+                "&vCode=" + api.getvCode();
 
         try {
            rep = hQuery.execute(query).get();

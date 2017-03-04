@@ -1,7 +1,5 @@
 package ragus.lienty.asynctask;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 /**
@@ -11,39 +9,35 @@ import java.util.ArrayList;
 public class Account {
 
     private ArrayList<Character> listChar = new ArrayList<>();
-    protected String apiKey;
-    protected String vCode;
+
+    protected EveAPI api;
 
 
     public Account(){
         //Empty constructor for ORM
     }
 
-    public Account(String apiKey, String vCode){
+    public Account(EveAPI api){
 
-        this.apiKey = apiKey;
-        this.vCode = vCode;
+        this.api = api;
     }
 
     public void retrieveCharacters(){
 
         try {
-            this.listChar = XmlParser.extractXMLchar(this.apiKey, this.vCode);
+            if (!this.api.getKeyId().equals("") || !this.api.getvCode().equals("")) {
+                this.listChar = XmlParser.extractXMLchar(this.api);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
     // Getter / Setter
-
-    public String getApiKey() {
-        return apiKey;
+    public EveAPI getApi() {
+        return api;
     }
-
-    public String getvCode() {
-        return vCode;
-    }
-
     public ArrayList<Character> getListChar() {
         return listChar;
     }

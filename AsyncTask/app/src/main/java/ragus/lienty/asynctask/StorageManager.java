@@ -1,6 +1,7 @@
 package ragus.lienty.asynctask;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.util.Log;
 
 import java.io.File;
@@ -14,7 +15,8 @@ import java.io.IOException;
 
 public class StorageManager {
 
-    protected static String filename = "processedNotifications.txt";
+    protected static String notificationFilename = "processedNotifications.txt";
+    protected static String apiFilename = "api.txt";
 
     public static void saveNotificationId(Context context, String notificationId) {
 
@@ -23,8 +25,21 @@ public class StorageManager {
         String notificationIdString = String.format(notificationId + "%n");
 
         try {
-            outputStream = context.openFileOutput(filename, Context.MODE_APPEND);
+            outputStream = context.openFileOutput(notificationFilename, Context.MODE_APPEND);
             outputStream.write(notificationIdString.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void storeAPI(Context context, String api) {
+
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = context.openFileOutput(apiFilename, Context.MODE_PRIVATE);
+            outputStream.write(api.getBytes());
             outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -35,14 +50,17 @@ public class StorageManager {
 
         StorageManager.checkDataFile(context);
 
-        String storedNotifications = readFileAsString(context);
+        String storedNotifications = readFileAsString(context, notificationFilename);
 
-        return storedNotifications.contains(notificationId);
+        //Log.d("StorageManager", "notificationId " + notificationId);
+        //Log.d("StorageManager", "stored notifs " + storedNotifications);
+
+        return !storedNotifications.contains(notificationId);
     }
 
     protected static void checkDataFile(Context context) {
 
-        File file = new File(context.getFilesDir(), filename);
+        File file = new File(context.getFilesDir(), notificationFilename);
 
         if(!file.exists()) {
             try {
@@ -53,7 +71,7 @@ public class StorageManager {
         }
     }
 
-    public static String readFileAsString(Context context) {
+    public static String readFileAsString(Context context, String filename) {
 
         String result = "";
         File file = new File(context.getFilesDir(), filename);
@@ -69,7 +87,7 @@ public class StorageManager {
                 }
 
             } catch (Exception e) {
-                Log.d("TourGuide", e.toString());
+                Log.d("StorageManager", e.toString());
             } finally {
                 if (fis != null)
                     try {
@@ -79,5 +97,19 @@ public class StorageManager {
             }
         }
         return result;
+    }
+
+    public static EveAPI getStoredApi(Context context) {
+
+        String storedApiString = readFileAsString(context, apiFilename);
+        EveAPI api = new EveAPI();
+
+        if (!storedApiString.equals("") && storedApiString.contains(":")) {
+            String[] storedValues = storedApiString.split(":");
+            api.setKeyId(storedValues[0]);
+            api.setvCode(storedValues[1]);
+        }
+
+        return api;
     }
 }

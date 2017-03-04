@@ -19,6 +19,7 @@ public class Character {
     private String corpName;
     private String charId;
     private String name;
+    private Account account;
     private ArrayList<EveNotif> listNotif = new ArrayList<>();
 
     public Character(){
@@ -33,10 +34,10 @@ public class Character {
         this.charId = charId;
     }
 
-    public void retrieveNotifications(String key, String verif){
+    public void retrieveNotifications(EveAPI api){
 
         try {
-            this.listNotif = XmlParser.extractXMLNotif(key, verif, this);
+            this.listNotif = XmlParser.extractXMLNotif(api, this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,5 +63,13 @@ public class Character {
 
     public ArrayList<EveNotif> getListNotif() {
         return listNotif;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
