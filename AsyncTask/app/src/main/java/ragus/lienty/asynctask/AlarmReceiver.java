@@ -38,7 +38,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         alarm.setInexactRepeating(
             AlarmManager.RTC_WAKEUP,
             System.currentTimeMillis()+ AlarmManager.INTERVAL_HALF_HOUR / 30,
-            AlarmManager.INTERVAL_HALF_HOUR / 30,
+            AlarmManager.INTERVAL_HALF_HOUR,
             pIntent
         );
     }
