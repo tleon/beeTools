@@ -9,6 +9,7 @@ import java.util.Map;
  */
 
 public class StaticData {
+
     public static final Map<Integer, String> notificationTypes = createMap();
 
     private static Map<Integer, String> createMap() {

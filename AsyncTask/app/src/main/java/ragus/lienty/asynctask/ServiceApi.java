@@ -68,9 +68,7 @@ public class ServiceApi extends IntentService {
                 String text;
 
                 if(StaticData.notificationTypes.containsKey(notificationType)){
-
                     text = StaticData.notificationTypes.get(notificationType);
-                    //Log.d("Service", "notif type = " + notificationType + " text = " + text);
                 } else {
                     text = "Unknown notification type : " + notification.getNotifType();
                 }
@@ -78,10 +76,10 @@ public class ServiceApi extends IntentService {
                 if (StorageManager.isNotificationNew(this,notification.getNotifId())) {
 
                     sendNotification(
-                            text,
-                            notification.getNotifId(),
-                            notification.getSenderName(),
-                            character.getName()
+                        text,
+                        notification.getNotifId(),
+                        notification.getSenderName(),
+                        character.getName()
                     );
 
                     StorageManager.saveNotificationId(this,notification.getNotifId());
@@ -95,5 +93,4 @@ public class ServiceApi extends IntentService {
         super.onDestroy();
         Log.d("ServiceApi", "Service Destroyed");
     }
-
 }
