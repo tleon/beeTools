@@ -10,6 +10,7 @@ import android.util.Log;
 
 import static android.app.Notification.DEFAULT_LIGHTS;
 import static android.app.Notification.DEFAULT_SOUND;
+import static android.app.Notification.DEFAULT_VIBRATE;
 
 /**
  * Created by Tom on 01/03/2017.
@@ -42,7 +43,7 @@ public class ServiceApi extends IntentService {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                     .setSmallIcon(R.drawable.ic_launcher)
-                    .setDefaults(DEFAULT_SOUND | DEFAULT_SOUND | DEFAULT_LIGHTS)
+                    .setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE | DEFAULT_LIGHTS)
                     .setContentTitle(characterName + " - " + notificationType)
                     .setContentText("From " + senderName);
 
