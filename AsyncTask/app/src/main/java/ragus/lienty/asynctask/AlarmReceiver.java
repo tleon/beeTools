@@ -17,7 +17,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         Intent i = new Intent(context, ServiceApi.class);
-        Log.d("AlarmReceiver", "Broadcast Reveived");
+        Log.d("AlarmReceiver", "Broadcast Received");
         context.startService(i);
     }
 
