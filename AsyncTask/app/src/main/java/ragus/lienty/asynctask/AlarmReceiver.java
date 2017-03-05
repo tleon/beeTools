@@ -39,8 +39,8 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
             PendingIntent.FLAG_UPDATE_CURRENT
         );
 
-        AlarmManager alarm = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        alarm.setInexactRepeating(
+        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setInexactRepeating(
             AlarmManager.RTC_WAKEUP,
             System.currentTimeMillis()+ AlarmManager.INTERVAL_HALF_HOUR / 30,
             AlarmManager.INTERVAL_HALF_HOUR,
