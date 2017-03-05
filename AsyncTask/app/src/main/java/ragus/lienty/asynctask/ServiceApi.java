@@ -18,21 +18,17 @@ import static android.app.Notification.DEFAULT_SOUND;
 public class ServiceApi extends IntentService {
 
     private NotificationManager mNotificationManager;
-    private String keyId;
-    private String vCode;
-
     public ServiceApi(){
         super("ServiceApi");
     }
 
     @Override
     public void onHandleIntent(Intent intent) {
-        task(intent);
+        task();
         Log.d("ServiceApi", "Service Running");
     }
 
-    public void task(Intent intent){
-
+    public void task(){
         iterateNotifications();
     }
 
