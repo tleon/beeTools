@@ -1,18 +1,23 @@
 package ragus.lienty.asynctask;
 
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
+
+import java.util.Date;
 
 /**
  * Created by leone on 02/03/2017.
  */
 
-public class AlarmReceiver extends BroadcastReceiver {
+public class AlarmReceiver extends WakefulBroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {

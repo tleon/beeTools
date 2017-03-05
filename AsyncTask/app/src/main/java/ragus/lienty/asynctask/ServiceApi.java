@@ -5,15 +5,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import static android.app.Notification.DEFAULT_LIGHTS;
+import static android.app.Notification.DEFAULT_SOUND;
 
 /**
  * Created by Tom on 01/03/2017.
@@ -40,25 +36,23 @@ public class ServiceApi extends IntentService {
         iterateNotifications();
     }
 
-    private void sendNotification(String msg, String notifId, String senderName) {
+    private void sendNotification(String notificationType, String notificationId, String senderName, String characterName) {
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, MainActivity.class), 0);
 
-        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_launcher)
-                        .setContentTitle(msg)
-                        .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
-                        .setContentText("From " + senderName)
-                        .setSound(alarmSound);
+                    .setSmallIcon(R.drawable.ic_launcher)
+                    .setDefaults(DEFAULT_SOUND | DEFAULT_SOUND | DEFAULT_LIGHTS)
+                    .setContentTitle(characterName + " - " + notificationType)
+                    .setContentText("From " + senderName);
 
         mBuilder.setContentIntent(contentIntent);
-        mNotificationManager.notify(Integer.parseInt(notifId), mBuilder.build());
+
+        mNotificationManager.notify(Integer.parseInt(notificationId), mBuilder.build());
     }
 
     protected void iterateNotifications() {
@@ -86,7 +80,14 @@ public class ServiceApi extends IntentService {
                 }
 
                 if (StorageManager.isNotificationNew(this,notification.getNotifId())) {
-                    sendNotification(text, notification.getNotifId(), notification.getSenderName());
+
+                    sendNotification(
+                            text,
+                            notification.getNotifId(),
+                            notification.getSenderName(),
+                            character.getName()
+                    );
+
                     StorageManager.saveNotificationId(this,notification.getNotifId());
                 }
             }
