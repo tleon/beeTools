@@ -27,13 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
         EveAPI eveAPI = StorageManager.getStoredApi(this);
 
-        Intent intent = getIntent();
-        Uri openUri = intent.getData();
-        if (openUri != null ) {
-            eveAPI.setKeyId(openUri.getQueryParameter("keyID"));
-            eveAPI.setvCode(openUri.getQueryParameter("vCode"));
-        }
-
         keyIdField.setText(eveAPI.getKeyId(), TextView.BufferType.EDITABLE);
         vCodeField.setText(eveAPI.getvCode(), TextView.BufferType.EDITABLE);
 
@@ -70,6 +63,24 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Api stored", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        EditText keyIdField = (EditText)findViewById(R.id.keyId);
+        EditText vCodeField = (EditText)findViewById(R.id.vCode);
+        EveAPI api = new EveAPI();
+
+        Uri openUri = intent.getData();
+        if (openUri != null ) {
+            api.setKeyId(openUri.getQueryParameter("keyID"));
+            api.setvCode(openUri.getQueryParameter("vCode"));
+        }
+
+        keyIdField.setText(api.getKeyId(), TextView.BufferType.EDITABLE);
+        vCodeField.setText(api.getvCode(), TextView.BufferType.EDITABLE);
     }
 }
 
