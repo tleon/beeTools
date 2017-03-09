@@ -20,12 +20,19 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="eve" />
+            </intent-filter>
         </activity>
 
-        <receiver android:name=".AlarmReceiver" android:process=":remote"></receiver>
+        <receiver android:name=".AlarmReceiver" android:process=":remote" />
         <receiver android:name=".AutoStartReceiver" android:enabled="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
